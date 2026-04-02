@@ -1,6 +1,12 @@
 "use client";
 import { useState } from "react";
 import { HambergerMenu, CloseSquare } from "iconsax-react";
+import dynamic from "next/dynamic";
+
+const WalletConnectButton = dynamic(
+  () => import("@/components/WalletConnectButton"),
+  { ssr: false },
+);
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -40,18 +46,7 @@ export default function Navbar() {
 
         {/* CTA */}
         <div className="hidden md:flex items-center gap-3">
-          <a
-            href="#"
-            className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
-          >
-            Sign in
-          </a>
-          <a
-            href="#"
-            className="text-sm bg-gradient-to-r from-violet-600 to-blue-500 text-white px-4 py-2 rounded-lg hover:opacity-90 transition-opacity font-medium"
-          >
-            Get started
-          </a>
+          <WalletConnectButton />
         </div>
 
         <button
@@ -82,12 +77,9 @@ export default function Navbar() {
           <a href="#" onClick={() => setOpen(false)}>
             Docs
           </a>
-          <a
-            href="#"
-            className="bg-gradient-to-r from-violet-600 to-blue-500 text-white px-4 py-2 rounded-lg text-center font-medium"
-          >
-            Get started
-          </a>
+          <div onClick={() => setOpen(false)}>
+            <WalletConnectButton />
+          </div>
         </div>
       )}
     </nav>
